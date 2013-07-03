@@ -20,7 +20,7 @@ class Database
 		}
 		catch(PDOException $exception)
 		{
-			die($exception->getMessage());
+			trigger_error($exception->getMessage());
 		}
 		
 		$this->connected = true;
@@ -41,7 +41,7 @@ class Database
 		return $this;
 	}
 	
-	public function bind()
+	public function bind_param()
 	{
 		$this->params = func_get_args();
 		
@@ -56,6 +56,20 @@ class Database
 		}
 		
 		return new PDOResult($this->result, $this->link->lastInsertId());
+	}
+	
+	public function insert_array($table, $array)
+	{
+		$values = array();
+		foreach($array as $key => $value)
+		{
+			$values[] = "'{$value}'";
+		}
+	
+		$key = implode(',', array_keys($array));
+		$value = implode(',', $values);
+		
+		return $this->prepare('INSERT INTO '.$table.' ('.$key.') VALUES ('.$value.')')->execute();
 	}
 }
 
