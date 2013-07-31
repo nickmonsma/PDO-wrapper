@@ -1,6 +1,7 @@
 <?php
 /**
  * Class Database - MySQL Handeling - Engine PDO;
+ * Lekker he :$
  */
 
 class Database
