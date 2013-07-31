@@ -1,8 +1,6 @@
 <?php
 /**
  * Class Database - MySQL Handeling - Engine PDO;
- * Het is je 'je broer' dag, swa.
- * Lekker he :$
  */
 
 class Database
